@@ -1,0 +1,23 @@
+# Makefile template for shared library
+
+CC = gcc # C compiler
+CFLAGS = -fPIC -Wall -Wextra -O2 -g # C flags
+LDFLAGS = -shared  # linking flags
+RM = rm -f  # rm command
+TARGET_LIB = libzlibwapi.so # target lib
+
+SRCS = ioapi.c mztools.c unzip.c zip.c # source files
+OBJS = $(SRCS:.c=.o)
+
+.PHONY: all
+all: ${TARGET_LIB}
+
+$(SRCS):
+	$(CC) $(CFLAGS) -MM $< >$@
+
+$(TARGET_LIB): $(OBJS)
+	$(CC) ${LDFLAGS} -o $@ $^
+
+.PHONY: clean
+clean:
+	-${RM} ${TARGET_LIB} ${OBJS}
