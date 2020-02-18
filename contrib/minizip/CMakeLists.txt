@@ -8,7 +8,7 @@ set(ZLIB_MINIZIP_SRC
 
 add_library(minizip STATIC ${ZLIB_MINIZIP_SRC})
 
-target_include_directories(minizip PUBLIC .)
+target_include_directories(minizip PUBLIC . PUBLIC ../../)
 target_link_libraries(minizip PUBLIC zlibstatic)
 
 install(TARGETS minizip
